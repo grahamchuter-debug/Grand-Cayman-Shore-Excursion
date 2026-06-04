@@ -81,7 +81,10 @@ FISH_ALT = (
 CATAMARAN_IMG = "images/catamaran-tour.jpg"
 CATAMARAN_ALT = "Private catamaran sailing in turquoise water off Grand Cayman on a cruise port day"
 INTRO_IMG = "images/grand-cayman-intro.png"
-INTRO_ALT = "Aerial view of Grand Cayman coastline with turquoise reef water and George Town area"
+INTRO_ALT = (
+    "Aerial view of Grand Cayman island showing Seven Mile Beach, turquoise reef water, "
+    "resorts and boats along the coastline"
+)
 
 
 def page_shell(
