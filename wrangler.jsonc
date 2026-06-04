@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "grand-cayman-shore-excursion",
+  "compatibility_date": "2026-06-04",
+  "observability": { "enabled": true },
+  "assets": { "directory": "." },
+  "routes": [
+    {
+      "pattern": "grandcaymanshoreexcursion.com",
+      "custom_domain": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "grand-cayman-shore-excursion",
+  "private": true,
+  "scripts": {
+    "build": "python3 scripts/build-grand-cayman-site.py",
+    "deploy": "wrangler deploy",
+    "preview": "python3 -m http.server 8901"
+  },
+  "devDependencies": {
+    "wrangler": "^4.94.0"
+  }
+}
