@@ -1,0 +1,16 @@
+{
+  "portSlug": "grand-cayman",
+  "destinationName": "Grand Cayman",
+  "domain": "https://grandcaymanshoreexcursion.com",
+  "siteName": "Grand Cayman Shore Excursion",
+  "authoritySource": "../caribbean-shore-excursions/data/imported-schedules/grand-cayman.json",
+  "localOutput": "data/generated/grand-cayman-schedules.json",
+  "scheduleHubPath": "ship-schedule",
+  "portGuidePath": "grand-cayman-cruise-port-guide.html",
+  "bestExcursionsPath": "best-grand-cayman-shore-excursions.html",
+  "oneDayPath": "one-day-in-grand-cayman.html",
+  "fontsCss": "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap",
+  "expectedTotals": { "total": 499, "byYear": { "2026": 167, "2027": 332, "2028": 0 } },
+  "hubIntro": "Find your ship and date for Grand Cayman, then plan Stingray City or Seven Mile Beach around a realistic return buffer. Many calls tender ashore — confirm with your cruise line how you will land that day.",
+  "notes": "GENERATED FROM CARIBBEAN AUTHORITY — DO NOT MANUALLY EDIT schedule output files."
+}

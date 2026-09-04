@@ -2,7 +2,11 @@
   "name": "grand-cayman-shore-excursion",
   "private": true,
   "scripts": {
-    "build": "python3 scripts/build-grand-cayman-site.py",
+    "sync:schedules": "node scripts/sync-schedules.mjs",
+    "qa:schedules": "node scripts/qa-schedules.mjs",
+    "build": "python3 scripts/build-grand-cayman-site.py && python3 scripts/world2_extend_grand_cayman.py && python3 scripts/generate_schedule_pages.py",
+    "build:all": "npm run sync:schedules && npm run qa:schedules && npm run build",
+    "images": "python3 scripts/fetch-grand-cayman-images.py",
     "deploy": "wrangler deploy",
     "preview": "python3 -m http.server 8901"
   },

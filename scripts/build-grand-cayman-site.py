@@ -111,7 +111,7 @@ def page_shell(
     trust_attr = '\n  data-trust-strip="partials/trust-strip.html"' if trust else ""
     content_file = content if content.startswith("content/") else f"content/{content}"
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -323,7 +323,7 @@ def _snapshot_default(**overrides: str) -> str:
         best_for="Stingray City, reef snorkel, beaches",
         activity_level="Varies by tour — see comparison",
         family="Excellent with age-appropriate picks",
-        return_ship="Operators usually allow 60–90 min buffer",
+        return_ship="Build your own buffer; confirm operator return plan",
         popular="Stingray sandbar, snorkel boats, Seven Mile Beach",
     )
     defaults.update(overrides)
@@ -426,7 +426,7 @@ def _content_home() -> str:
 
 def _content_best() -> str:
     cards = _card_grid([
-        (STINGRAY_IMG, STINGRAY_ALT, "Stingray City", "Touch stingrays in waist-deep turquoise water on North Sound sandbar tours.", "stingray-city-excursions.html", "Book Stingray"),
+        (STINGRAY_IMG, STINGRAY_ALT, "Stingray City", "Chance to meet southern stingrays in shallow North Sound water — conditions and wildlife vary.", "stingray-city-excursions.html", "Stingray guide"),
         (SNORKEL_IMG, SNORKEL_ALT, "Snorkelling", "Coral gardens, turtles and reef fish on barrier reef snorkel boats.", "grand-cayman-snorkelling-tours.html", "Reef Tours"),
         (SEVEN_MILE_IMG, SEVEN_MILE_ALT, "Seven Mile Beach", "Beach breaks with chairs, calm water and timed returns.", "seven-mile-beach-excursions.html", "Beach Day"),
         (PRIVATE_IMG, PRIVATE_ALT, "Private Tours", "Catamarans, island drives and custom combos for your group.", "grand-cayman-private-tours.html", "Private Tours"),
@@ -434,7 +434,7 @@ def _content_best() -> str:
     snap = _snapshot_default(best_for="Comparing all excursion types", popular="See comparison table below")
     return f"""<section class="pt-8 pb-4 bg-white"><div class="max-w-3xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-display font-bold text-gray-900 mb-4">Best Grand Cayman Shore Excursions</h2>
-      <p class="text-gray-600 leading-relaxed text-sm">Operators meet at <strong>George Town cruise terminals</strong> (Royal Watler, Heritage Quay, Spot Bay) and plan returns with buffer before all aboard.</p>
+      <p class="text-gray-600 leading-relaxed text-sm">Operators meet near <strong>George Town cruise terminals</strong> and typically plan returns with enough time before all aboard — confirm with the operator.</p>
     </div></section>
     <section class="pb-8 bg-white"><div class="max-w-7xl mx-auto px-4">{snap}</div></section>
     {_comparison_section()}
@@ -461,7 +461,7 @@ def _content_port() -> str:
       </div>
       <div class="grid lg:grid-cols-2 gap-6 text-sm">
         <div class="bg-white rounded-3xl p-6 border border-sky-100"><h3 class="font-display font-bold text-lg mb-2">George Town Piers</h3><p class="text-gray-600">Royal Watler and adjacent berths place you in downtown George Town — shopping, taxis and tour desks within minutes.</p></div>
-        <div class="bg-white rounded-3xl p-6 border border-sky-100"><h3 class="font-display font-bold text-lg mb-2">Tender Days</h3><p class="text-gray-600">Some calls use tenders to shore. Factor 15–25 minutes each way when planning Stingray City or afternoon beach time.</p></div>
+        <div class="bg-white rounded-3xl p-6 border border-sky-100"><h3 class="font-display font-bold text-lg mb-2">Tender Days</h3><p class="text-gray-600">Many Grand Cayman calls tender ashore, but arrangements vary by ship, pier capacity and the day. Confirm with your cruise line how you will land — and build tender queue time into morning Stingray or afternoon beach plans.</p></div>
       </div>
     </div></section>
     <section class="py-12 bg-white"><div class="max-w-7xl mx-auto px-4">
@@ -488,7 +488,7 @@ def _content_one_day() -> str:
         <li class="flex gap-4 bg-white rounded-2xl p-5 border border-sky-100"><span class="font-bold text-ocean-600 shrink-0">09:30</span><div><strong>Stingray City sandbar</strong><p class="text-gray-600 mt-1">Waist-deep turquoise water with southern stingrays.</p></div></li>
         <li class="flex gap-4 bg-white rounded-2xl p-5 border border-sky-100"><span class="font-bold text-ocean-600 shrink-0">11:30</span><div><strong>Barrier reef snorkel</strong><p class="text-gray-600 mt-1">Second stop on many combo tours — coral and tropical fish.</p></div></li>
         <li class="flex gap-4 bg-white rounded-2xl p-5 border border-sky-100"><span class="font-bold text-ocean-600 shrink-0">14:00</span><div><strong>Seven Mile Beach or Starfish Point</strong><p class="text-gray-600 mt-1">If time allows — otherwise return early with buffer.</p></div></li>
-        <li class="flex gap-4 bg-white rounded-2xl p-5 border border-sky-100"><span class="font-bold text-ocean-600 shrink-0">16:30</span><div><strong>Back at pier</strong><p class="text-gray-600 mt-1">Allow margin before published all-aboard.</p></div></li>
+        <li class="flex gap-4 bg-white rounded-2xl p-5 border border-sky-100"><span class="font-bold text-ocean-600 shrink-0">16:30</span><div><strong>Back at pier</strong><p class="text-gray-600 mt-1">Build your own buffer before published all-aboard — confirm times with your ship and operator.</p></div></li>
       </ol>
       <div class="mt-10">{_internal_links()}</div>
     </div></section>"""
@@ -496,12 +496,12 @@ def _content_one_day() -> str:
 
 def _content_stingray() -> str:
     return _content_excursion_page(
-        "Stingray City is a shallow sandbar on Grand Cayman's North Sound where southern stingrays glide around guests in waist-deep turquoise water. Nearly every cruise visitor ranks it as the must-do George Town excursion — usually combined with a reef snorkel stop on the same boat.",
+        "Stingray City is a shallow sandbar on Grand Cayman's North Sound where guests may encounter southern stingrays in typically waist-deep turquoise water. Wildlife sightings are never guaranteed — numbers and behaviour vary with conditions, boat traffic and the day. Many cruise visitors combine the sandbar with a reef snorkel stop on the same boat.",
         [
-            "Book morning departures for calmer water and smaller crowds.",
-            "Listen to crew briefing — gentle interaction protects stingrays.",
+            "Morning departures often mean calmer water and smaller crowds — still confirm with the operator.",
+            "Listen to the crew briefing — gentle interaction protects stingrays when they are present.",
             "Wear reef-safe sunscreen; water shoes optional on the boat.",
-            "Combo tours save time vs booking Stingray and snorkel separately.",
+            "Combo tours can save time vs separate Stingray and snorkel bookings — confirm return timing in writing.",
         ],
         dict(
             best_for="First-time Grand Cayman visitors",
@@ -515,11 +515,11 @@ def _content_stingray() -> str:
 
 def _content_seven_mile() -> str:
     return _content_excursion_page(
-        "Seven Mile Beach is Grand Cayman's famous white-sand strip west of George Town — calm Caribbean water, public access points and resort beach clubs. Cruise excursions include transport, often chair rental and a fixed return time to the pier.",
+        "Seven Mile Beach is Grand Cayman's famous white-sand strip west of George Town — calm Caribbean water, public access points and resort beach clubs. Organised cruise transfers typically include transport and a timed return window to the pier — confirm details with the operator.",
         [
-            "Public beach areas are free; clubs may charge for chairs and facilities.",
-            "Traffic from port can take 15–25 minutes — confirm pickup time.",
-            "Pair with morning Stingray City only if your ship stays late.",
+            "Public beach access is common; resort clubs may charge separately for chairs or facilities — confirm on the day.",
+            "Traffic from George Town can take roughly 15–25 minutes — confirm pickup time.",
+            "Pair with morning Stingray City only if your ship stays late and you build a sensible return buffer.",
             "Reef-safe sunscreen and shade hats recommended.",
         ],
         dict(
@@ -572,7 +572,7 @@ def _content_starfish() -> str:
 
 def _content_private() -> str:
     return _content_excursion_page(
-        "Private catamarans, SUVs and charter boats let your group set the pace — Stingray City first, custom snorkel stops, Seven Mile Beach lunch, or a fishing run. Drivers and captains who serve cruise guests understand all-aboard deadlines.",
+        "Private catamarans, SUVs and charter boats let your group set the pace — Stingray City first, custom snorkel stops, Seven Mile Beach lunch, or a fishing run. Operators who serve cruise guests usually plan around all-aboard — still confirm return timing in writing.",
         [
             "Split cost across families to rival per-person coach pricing.",
             "Share your must-see list when booking — routes are flexible.",
@@ -697,7 +697,7 @@ def _content_faq() -> str:
       <details class="faq-item rounded-2xl border border-sky-100 p-5"><summary class="font-semibold text-gray-900 cursor-pointer">Tender port or dock?</summary>
         <p class="mt-4 text-sm text-gray-500">Depends on the ship and pier assignment. Check your daily programme — add tender time when booking morning Stingray departures.</p></details>
       <details class="faq-item rounded-2xl border border-sky-100 p-5"><summary class="font-semibold text-gray-900 cursor-pointer">Ship excursion or book independently?</summary>
-        <p class="mt-4 text-sm text-gray-500">Ship tours guarantee the vessel waits if the operator is late. Reputable Grand Cayman operators plan returns with buffer — confirm policies and read reviews.</p></details>
+        <p class="mt-4 text-sm text-gray-500">Ship-sold tours often include a wait-if-late policy from the cruise line. Independent operators typically plan a return window — confirm policies, build your own buffer, and do not cut it fine.</p></details>
       {_internal_links()}
     </div></section>"""
 
@@ -708,7 +708,7 @@ def _faq_schema() -> dict:
         ("Is Stingray City safe for children?", "Yes on organised tours with crew supervision in shallow water."),
         ("Do I need Cayman Islands cash?", "US dollars are widely accepted; ATMs are in George Town."),
         ("Tender port or dock?", "Depends on ship and pier — add tender time to morning tour planning."),
-        ("Ship excursion or book independently?", "Ship tours guarantee wait-if-late; reputable locals plan buffer returns."),
+        ("Ship excursion or book independently?", "Ship-sold tours often include wait-if-late; confirm independent operator policies and build your own buffer."),
     ]
     return {
         "@context": "https://schema.org",
@@ -807,7 +807,7 @@ def main() -> None:
       <li class="trust-strip__item"><span class="trust-strip__check" aria-hidden="true">✔</span> Stingray City Sandbar</li>
       <li class="trust-strip__item"><span class="trust-strip__check" aria-hidden="true">✔</span> Barrier Reef Snorkelling</li>
       <li class="trust-strip__item"><span class="trust-strip__check" aria-hidden="true">✔</span> Seven Mile Beach</li>
-      <li class="trust-strip__item"><span class="trust-strip__check" aria-hidden="true">✔</span> Cruise-Friendly Returns</li>
+      <li class="trust-strip__item"><span class="trust-strip__check" aria-hidden="true">✔</span> Tender-Aware Planning</li>
     </ul>
   </div>
 </section>
@@ -845,7 +845,7 @@ def main() -> None:
         "hero-stingray.html": _hero_inner(
             "North Sound Sandbar",
             "Stingray City<br/><span class=\"text-teal-300\">Excursions</span>",
-            "Stand in turquoise shallow water with southern stingrays — Grand Cayman's essential cruise experience.",
+            "Shallow North Sound sandbar tours with a chance to meet southern stingrays — wildlife and conditions vary.",
             STINGRAY_IMG,
             STINGRAY_ALT,
             breadcrumb="Stingray City",
@@ -853,7 +853,7 @@ def main() -> None:
         "hero-seven-mile.html": _hero_inner(
             "Grand Cayman · Caribbean",
             "Seven Mile Beach<br/><span class=\"text-teal-300\">Excursions</span>",
-            "White sand and calm turquoise water — organised beach days with cruise-friendly returns.",
+            "White sand and calm turquoise water — organised beach days with a timed return window you confirm with the operator.",
             SEVEN_MILE_IMG,
             SEVEN_MILE_ALT,
             breadcrumb="Seven Mile Beach",
@@ -1173,7 +1173,11 @@ def main() -> None:
   "name": "grand-cayman-shore-excursion",
   "private": true,
   "scripts": {
-    "build": "python3 scripts/build-grand-cayman-site.py",
+    "sync:schedules": "node scripts/sync-schedules.mjs",
+    "qa:schedules": "node scripts/qa-schedules.mjs",
+    "build": "python3 scripts/build-grand-cayman-site.py && python3 scripts/world2_extend_grand_cayman.py && python3 scripts/generate_schedule_pages.py",
+    "build:all": "npm run sync:schedules && npm run qa:schedules && npm run build",
+    "images": "python3 scripts/fetch-grand-cayman-images.py",
     "deploy": "wrangler deploy",
     "preview": "python3 -m http.server 8901"
   },
@@ -1184,6 +1188,7 @@ def main() -> None:
 """,
     )
 
+    # Domain may already be attached in Cloudflare; prefer workers_dev for local hygiene.
     write(
         "wrangler.jsonc",
         """{
@@ -1192,12 +1197,7 @@ def main() -> None:
   "compatibility_date": "2026-06-04",
   "observability": { "enabled": true },
   "assets": { "directory": "." },
-  "routes": [
-    {
-      "pattern": "grandcaymanshoreexcursion.com",
-      "custom_domain": true
-    }
-  ]
+  "workers_dev": true
 }
 """,
     )
