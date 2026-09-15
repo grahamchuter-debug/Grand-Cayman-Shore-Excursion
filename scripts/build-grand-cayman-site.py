@@ -61,25 +61,25 @@ CRYSTAL_ALT = (
 GLASS_IMG = "images/glass-bottom-boat-hero.png"
 GLASS_ALT = (
     "View through glass-bottom boat windows of tropical fish and reef seabed "
-    "in clear turquoise Grand Cayman water on a cruise shore excursion"
+    "in clear turquoise water"
 )
 FAMILY_IMG = "images/grand-cayman-family.png"
 FAMILY_ALT = (
     "Child and adult interacting with stingrays in shallow turquoise water at Stingray City "
     "Grand Cayman on a family-friendly cruise shore excursion"
 )
-HORSE_IMG = "images/horseback-riding-hero.png"
+HORSE_IMG = "images/seven-mile-beach-hero.png"
 HORSE_ALT = (
-    "Three riders on horses trotting along a sandy beach beside turquoise ocean "
-    "on a Grand Cayman horseback riding shore excursion"
+    "Aerial view of Seven Mile Beach Grand Cayman coastline — context for "
+    "land-based shore excursions including horseback rides"
 )
 FISH_IMG = "images/fishing-charter-hero.png"
 FISH_ALT = (
     "Angler holding a large tuna on the deck of a sport fishing charter boat "
-    "in blue ocean off Grand Cayman"
+    "in open ocean"
 )
-CATAMARAN_IMG = "images/catamaran-tour.jpg"
-CATAMARAN_ALT = "Private catamaran sailing in turquoise water off Grand Cayman on a cruise port day"
+CATAMARAN_IMG = "images/grand-cayman-private-tours.png"
+CATAMARAN_ALT = "Private boat in turquoise shallow water — Grand Cayman private charter context"
 INTRO_IMG = "images/grand-cayman-intro.png"
 INTRO_ALT = (
     "Aerial view of Grand Cayman island showing Seven Mile Beach, turquoise reef water, "
@@ -100,7 +100,9 @@ def page_shell(
     schema: dict | None = None,
     trust: bool = True,
 ) -> str:
-    canon = f"{DOMAIN}/" if not canonical_path else f"{DOMAIN}/{canonical_path}"
+    # Extensionless apex canonical (Phase 32B). Accept legacy ".html" inputs.
+    slug = (canonical_path or "").removesuffix(".html").strip("/")
+    canon = f"{DOMAIN}/" if not slug else f"{DOMAIN}/{slug}"
     schema_block = ""
     if schema:
         schema_block = (
@@ -1175,10 +1177,10 @@ def main() -> None:
   "scripts": {
     "sync:schedules": "node scripts/sync-schedules.mjs",
     "qa:schedules": "node scripts/qa-schedules.mjs",
-    "build": "python3 scripts/build-grand-cayman-site.py && python3 scripts/world2_extend_grand_cayman.py && python3 scripts/generate_schedule_pages.py",
+    "build": "python3 scripts/build-grand-cayman-site.py && python3 scripts/world2_extend_grand_cayman.py && python3 scripts/generate_schedule_pages.py && python3 scripts/assemble-grand-cayman-pages.py",
     "build:all": "npm run sync:schedules && npm run qa:schedules && npm run build",
     "images": "python3 scripts/fetch-grand-cayman-images.py",
-    "deploy": "wrangler deploy",
+    "deploy": "npm run build && wrangler deploy",
     "preview": "python3 -m http.server 8901"
   },
   "devDependencies": {
@@ -1188,19 +1190,7 @@ def main() -> None:
 """,
     )
 
-    # Domain may already be attached in Cloudflare; prefer workers_dev for local hygiene.
-    write(
-        "wrangler.jsonc",
-        """{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "grand-cayman-shore-excursion",
-  "compatibility_date": "2026-06-04",
-  "observability": { "enabled": true },
-  "assets": { "directory": "." },
-  "workers_dev": true
-}
-""",
-    )
+    # wrangler.jsonc is managed for World 2.0 worker routing — do not overwrite.
 
     write(
         "deploy.sh",

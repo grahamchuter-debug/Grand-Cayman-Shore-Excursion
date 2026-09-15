@@ -11,6 +11,7 @@ package-lock.json
 package.json
 wrangler.jsonc
 wrangler.deploy.jsonc
+worker.js
 *.md
 !images/ATTRIBUTION.md
 .assetsignore
@@ -18,4 +19,6 @@ wrangler.deploy.jsonc
 .env.*
 *.log
 agent-transcripts
-data/imported-schedules/
+data/
+content/
+partials/

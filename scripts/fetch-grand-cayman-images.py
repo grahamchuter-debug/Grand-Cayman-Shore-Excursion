@@ -25,9 +25,7 @@ ACTIVE = [
     "crystal-caves-hero.png",
     "glass-bottom-boat-hero.png",
     "grand-cayman-family.png",
-    "horseback-riding-hero.png",
     "fishing-charter-hero.png",
-    "catamaran-tour.jpg",
     "grand-cayman-intro.png",
 ]
 

@@ -54,7 +54,9 @@ def page_shell(
     data_page: str = "schedule",
 ) -> str:
     prefix = asset_prefix(depth)
-    canon = f"{DOMAIN}/{canonical_path}" if canonical_path else f"{DOMAIN}/"
+    # Extensionless, no trailing slash (Phase 32B / CF drop-trailing-slash).
+    slug = (canonical_path or "").strip("/")
+    canon = f"{DOMAIN}/" if not slug else f"{DOMAIN}/{slug}"
     return f"""<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -189,7 +191,7 @@ def hub_page(meta: dict, by_year: dict, months: list[str]) -> str:
     <div class="bg-sand-50 rounded-2xl p-6 border border-pr-100 mb-10">
       <h2 class="font-display font-bold text-lg text-gray-900 mb-2">{meta["callCount"]:,} scheduled calls</h2>
       <p class="text-sm text-gray-600">{meta["integrity"]["firstDate"]} to {meta["integrity"]["lastDate"]} · {meta["integrity"]["uniqueShips"]} ships · {meta["integrity"]["cruiseLines"]} cruise lines · {meta["integrity"]["populatedMonths"]} populated months</p>
-      <p class="text-sm text-gray-600 mt-3"><a class="text-ocean-600 font-semibold" href="../{PORT_GUIDE}">Port &amp; terminal guide</a> · <a class="text-ocean-600 font-semibold" href="../{BEST_EXCURSIONS}">Excursion options</a> · <a class="text-ocean-600 font-semibold" href="../{ONE_DAY}">One-day planning</a></p>
+      <p class="text-sm text-gray-600 mt-3"><a class="text-ocean-600 font-semibold" href="/{PORT_GUIDE}">Port &amp; terminal guide</a> · <a class="text-ocean-600 font-semibold" href="/{BEST_EXCURSIONS}">Excursion options</a> · <a class="text-ocean-600 font-semibold" href="/{ONE_DAY}">One-day planning</a></p>
     </div>
     <h2 class="font-display font-bold text-xl text-gray-900 mb-4">Populated months</h2>
     <ul class="schedule-month-list space-y-2 text-sm">{month_links}</ul>
@@ -238,8 +240,8 @@ def month_page(ym: str, calls: list[dict]) -> str:
     <div class="mt-8">{body}</div>
     <p class="mt-10 text-sm flex flex-wrap gap-4">
       <a class="text-ocean-600 font-semibold" href="../">← {y} months</a>
-      <a class="text-ocean-600 font-semibold" href="../../../{PORT_GUIDE}">Port guide</a>
-      <a class="text-ocean-600 font-semibold" href="../../../{BEST_EXCURSIONS}">Excursions</a>
+      <a class="text-ocean-600 font-semibold" href="/{PORT_GUIDE}">Port guide</a>
+      <a class="text-ocean-600 font-semibold" href="/{BEST_EXCURSIONS}">Excursions</a>
     </p>
   </div>
 </section>
@@ -248,13 +250,13 @@ def month_page(ym: str, calls: list[dict]) -> str:
 
 def sitemap_entries(months: list[str], years: list[str]) -> list[tuple[str, str, str]]:
     entries = [
-        (f"{HUB}/", "0.8", "weekly"),
+        (f"{HUB}", "0.8", "weekly"),
     ]
     for y in years:
-        entries.append((f"{HUB}/{y}/", "0.7", "monthly"))
+        entries.append((f"{HUB}/{y}", "0.7", "monthly"))
     for ym in months:
         y, m = ym.split("-")
-        entries.append((f"{HUB}/{y}/{m}/", "0.6", "monthly"))
+        entries.append((f"{HUB}/{y}/{m}", "0.6", "monthly"))
     return entries
 
 
@@ -290,11 +292,11 @@ def main() -> list[tuple[str, str, str]]:
         page_shell(
             title=f"{esc(DEST)} Cruise Ship Schedule | Find Your Ship &amp; Date",
             description=f"{DEST} cruise ship schedule for cruise passengers — find your date and ship, then plan shore excursions around your port call.",
-            canonical_path=f"{HUB}/",
-            depth=1,
-            body_html=hub_page(meta, dict(by_year), months),
-        ),
-    )
+                canonical_path=f"{HUB}",
+                depth=1,
+                body_html=hub_page(meta, dict(by_year), months),
+            ),
+        )
 
     for y in years:
         write(
@@ -302,7 +304,7 @@ def main() -> list[tuple[str, str, str]]:
             page_shell(
                 title=f"{esc(DEST)} Cruise Schedule {y} | Ship Calls by Month",
                 description=f"{DEST} cruise ship schedule for {y} — {by_year[y]} scheduled calls. Browse populated months and search by ship or date.",
-                canonical_path=f"{HUB}/{y}/",
+                canonical_path=f"{HUB}/{y}",
                 depth=2,
                 body_html=year_page(y, by_year[y], months, meta["integrity"]["byMonth"]),
             ),
@@ -316,7 +318,7 @@ def main() -> list[tuple[str, str, str]]:
             page_shell(
                 title=f"{label} {esc(DEST)} Cruise Schedule | {len(month_calls)} Ship Calls",
                 description=f"{DEST} cruise ship arrivals in {label} — {len(month_calls)} scheduled calls with ship names, cruise lines and planned arrival/departure times.",
-                canonical_path=f"{HUB}/{y}/{m}/",
+                canonical_path=f"{HUB}/{y}/{m}",
                 depth=3,
                 body_html=month_page(ym, month_calls),
             ),
