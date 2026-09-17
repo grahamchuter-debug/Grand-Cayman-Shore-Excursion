@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """Generate Grand Cayman Shore Excursion static site files."""
 from pathlib import Path
 import json
